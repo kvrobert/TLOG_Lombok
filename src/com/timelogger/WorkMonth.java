@@ -12,54 +12,21 @@ import com.exceptions.EmptyTimeFieldException;
 import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  *
  * @author rkissvincze
  */
+@NoArgsConstructor
 public class WorkMonth {
-    private List<WorkDay> days = new ArrayList<>();
-    private YearMonth date = YearMonth.now();
+    @Getter @Setter private List<WorkDay> days = new ArrayList<>();
+    @Getter @Setter private YearMonth date = YearMonth.now();
     private long sumPerMonth;
     private long requiredMinPerMonth;
     
-    public WorkMonth(){}
-    
-    private WorkMonth(int year, int month){        
-        this.date = YearMonth.of(year, month);
-    }
-    
-    public static WorkMonth fromNumbers(int year, int month){
-        return new WorkMonth( year, month );
-    }
-    
-    private WorkMonth(String year, String month){        
-        this.date = YearMonth.of( Integer.parseInt(year), Integer.parseInt(month) );       
-    }
-    
-    public static WorkMonth fromString(String year, String month){
-        return new WorkMonth( year, month );
-    }
-    
-    private WorkMonth(String yearMonth){        
-        String year = yearMonth.substring(0, 4);
-        String month = yearMonth.substring(4, 6);
-        
-        this.date = YearMonth.of( Integer.parseInt(year), Integer.parseInt(month) );
-    }
-    
-    public static WorkMonth fromString(String yearMonth ){
-        return new WorkMonth( yearMonth );
-    }
-
-    public List<WorkDay> getDays() {
-        return days;
-    }
-
-    public YearMonth getDate() {
-        return date;
-    }
-
     public long getSumPerMonth() throws EmptyTimeFieldException {
         
         long summ = 0;
